@@ -9,5 +9,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Validate JSON schemas
       run: |
-        npm install --global ajv-cli
+        sudo npm install --global ajv-cli
         ajv compile -s src/*.schema.json
