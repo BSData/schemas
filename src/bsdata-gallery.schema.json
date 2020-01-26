@@ -1,0 +1,355 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json",
+    "title": "BSData Gallery API schema.",
+    "description": "Schema for an index of either repository source (aka gallery) or repository itself.",
+    "oneOf": [
+        {
+            "$ref": "#/definitions/repositorySource"
+        },
+        {
+            "$ref": "#/definitions/repository"
+        }
+    ],
+    "definitions": {
+        "repositorySource": {
+            "type": "object",
+            "title": "BSData repository metadata and index schema",
+            "required": [
+                "name",
+                "repositorySourceUrl"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "const": "https://github.com/BSData/schemas/blob/master/repo.schema.json"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Short name/title for repository source.",
+                    "minLength": 1,
+                    "examples": [
+                        "BattleScribe Data"
+                    ]
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Repository source description",
+                    "description": "Repository source description.",
+                    "examples": [
+                        "Community created data repositories for BattleScribe"
+                    ]
+                },
+                "battleScribeVersion": {
+                    "$ref": "#/definitions/battleScribeVersion"
+                },
+                "repositorySourceUrl": {
+                    "$ref": "#/definitions/repositorySourceUrl"
+                },
+                "websiteUrl": {
+                    "$ref": "#/definitions/websiteUrl"
+                },
+                "githubUrl": {
+                    "$ref": "#/definitions/githubUrl"
+                },
+                "discordUrl": {
+                    "$ref": "#/definitions/discordUrl"
+                },
+                "feedUrl": {
+                    "$ref": "#/definitions/feedUrl"
+                },
+                "twitterUrl": {
+                    "$ref": "#/definitions/twitterUrl"
+                },
+                "facebookUrl": {
+                    "$ref": "#/definitions/facebookUrl"
+                },
+                "repositories": {
+                    "type": "array",
+                    "description": "List of repositories in this source.",
+                    "items": {
+                        "$ref": "#/definitions/repository"
+                    }
+                }
+            }
+        },
+        "repository": {
+            "type": "object",
+            "title": "BSData repository metadata and index schema",
+            "required": [
+                "name",
+                "repositoryUrl"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "const": "https://github.com/BSData/schemas/blob/master/repo.schema.json"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Short identifier-like name, used in URLs etc., no spaces allowed. Most often not visible to users.",
+                    "examples": [
+                        "wh40k",
+                        "the-9th-age"
+                    ],
+                    "pattern": "^[\\S]+$"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Repository display name (pretty)",
+                    "description": "Full name of the repository, displayed for users in the UI elements.",
+                    "examples": [
+                        "Warhammer 40,000",
+                        "The 9th Age"
+                    ]
+                },
+                "battleScribeVersion": {
+                    "$ref": "#/definitions/battleScribeVersion"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                },
+                "lastUpdated": {
+                    "$ref": "#/definitions/lastUpdated"
+                },
+                "lastUpdateDescription": {
+                    "$ref": "#/definitions/lastUpdateDescription"
+                },
+                "indexUrl": {
+                    "$ref": "#/definitions/indexUrl"
+                },
+                "repositoryUrl": {
+                    "$ref": "#/definitions/repositoryUrl"
+                },
+                "githubUrl": {
+                    "$ref": "#/definitions/githubUrl"
+                },
+                "feedUrl": {
+                    "$ref": "#/definitions/feedUrl"
+                },
+                "bugTrackerUrl": {
+                    "$ref": "#/definitions/bugTrackerUrl"
+                },
+                "reportBugUrl": {
+                    "$ref": "#/definitions/reportBugUrl"
+                },
+                "repositoryFiles": {
+                    "type": "array",
+                    "description": "List of datafiles.",
+                    "items": {
+                        "$ref": "#/definitions/file"
+                    }
+                }
+            }
+        },
+        "version": {
+            "type": "string",
+            "description": "Repository release's semantic version (plus optional leading 'v'), often a tag of the release.",
+            "default": "v1.0.0",
+            "examples": [
+                "v1.0.0"
+            ],
+            "$comment": "The pattern below is a regex taken from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string",
+            "pattern": "^v?(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+        },
+        "battleScribeVersion": {
+            "type": "string",
+            "description": "Opaque string representing minimum BattleScribe(tm) version that can read this format, theoretically alphanumeric-comparable.",
+            "default": "2.02",
+            "examples": [
+                "2.02"
+            ],
+            "minLength": 1
+        },
+        "lastUpdated": {
+            "type": "string",
+            "description": "Timestamp of the latest update (latest release).",
+            "format": "date-time",
+            "examples": [
+                "2018-02-13T03:35:26.000Z"
+            ]
+        },
+        "lastUpdateDescription": {
+            "type": "string",
+            "description": "Displayable description of the latest update, commonly release title.",
+            "examples": [
+                "Initial release"
+            ]
+        },
+        "indexUrl": {
+            "type": "string",
+            "description": "URL of 'index.bsi' used as a fallback when GET of 'repositoryUrl' failed.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos/test-data/index.bsi"
+            ]
+        },
+        "repositoryUrl": {
+            "type": "string",
+            "description": "URL of repository's 'bsdata.json'.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos/test-data"
+            ]
+        },
+        "repositorySourceUrl": {
+            "type": "string",
+            "description": "URL of repository source's 'bsdata.json'.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos"
+            ]
+        },
+        "websiteUrl": {
+            "type": "string",
+            "description": "URL of website for the repository source.",
+            "format": "uri",
+            "examples": [
+                "https://battlescribedata.appspot.com"
+            ]
+        },
+        "githubUrl": {
+            "type": "string",
+            "description": "GitHub URL where the attributed element (repository or file) is hosted.",
+            "format": "uri",
+            "examples": [
+                "https://github.com/BSData/test-data",
+                "https://github.com/BSData/ronin/blob/master/Ronin.gst"
+            ]
+        },
+        "discordUrl": {
+            "type": "string",
+            "description": "Discord invitation URL of the owner community.",
+            "format": "uri",
+            "examples": [
+                "https://github.com/BSData/test-data",
+                "https://github.com/BSData/ronin/blob/master/Ronin.gst"
+            ]
+        },
+        "twitterUrl": {
+            "type": "string",
+            "description": "Twitter URL of the owner account.",
+            "format": "uri",
+            "examples": [
+                "https://github.com/BSData/test-data",
+                "https://github.com/BSData/ronin/blob/master/Ronin.gst"
+            ]
+        },
+        "facebookUrl": {
+            "type": "string",
+            "description": "Facebook URL of the owner page.",
+            "format": "uri",
+            "examples": [
+                "https://github.com/BSData/test-data",
+                "https://github.com/BSData/ronin/blob/master/Ronin.gst"
+            ]
+        },
+        "feedUrl": {
+            "type": "string",
+            "description": "URL of Atom feed with latest releases.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos/feeds/test-data.atom"
+            ]
+        },
+        "bugTrackerUrl": {
+            "type": "string",
+            "description": "URL of bug tracker for the repository.",
+            "format": "uri",
+            "examples": [
+                "https://github.com/BSData/test-data/issues"
+            ]
+        },
+        "reportBugUrl": {
+            "type": "string",
+            "description": "URL for reporting bugs in this repository's datafiles.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/#/repo/test-data"
+            ]
+        },
+        "file": {
+            "type": "object",
+            "description": "Repository file description",
+            "required": [
+                "id",
+                "type",
+                "revision",
+                "fileUrl"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Datafile identifier ('id' attribute).",
+                    "examples": [
+                        "3eb6-1682-4a4c-ece0"
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Datafile name ('name' attribute).",
+                    "examples": [
+                        "Test Data"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "gamesystem",
+                        "catalogue",
+                        "roster"
+                    ],
+                    "description": "Type of described file",
+                    "default": "catalogue"
+                },
+                "revision": {
+                    "type": "integer",
+                    "description": "Revision number in the form of a non-negative integer.",
+                    "default": 1
+                },
+                "battleScribeVersion": {
+                    "$ref": "#/definitions/battleScribeVersion"
+                },
+                "fileUrl": {
+                    "type": "string",
+                    "description": "URL of the datafile.",
+                    "format": "uri",
+                    "examples": [
+                        "http://battlescribedata.appspot.com/repos/ronin/Ronin.gstz"
+                    ]
+                },
+                "githubUrl": {
+                    "$ref": "#/definitions/githubUrl"
+                },
+                "bugTrackerUrl": {
+                    "$ref": "#/definitions/bugTrackerUrl"
+                },
+                "reportBugUrl": {
+                    "$ref": "#/definitions/reportBugUrl"
+                },
+                "authorName": {
+                    "type": "string",
+                    "description": "Display name of the datafile author",
+                    "examples": [
+                        "BSData developers"
+                    ]
+                },
+                "authorContact": {
+                    "type": "string",
+                    "description": "Some kind of contact detail, e.g. Twitter handle, chatroom username, email",
+                    "examples": [
+                        "@bsdata"
+                    ]
+                },
+                "authorUrl": {
+                    "type": "string",
+                    "description": "URL of datafile author's website.",
+                    "format": "uri",
+                    "examples": [
+                        "https://github.com/BSData"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
