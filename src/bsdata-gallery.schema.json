@@ -22,7 +22,8 @@
             "additionalProperties": false,
             "properties": {
                 "$schema": {
-                    "const": "https://github.com/BSData/schemas/blob/master/repo.schema.json"
+                    "type": "string",
+                    "default": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json"
                 },
                 "name": {
                     "type": "string",
@@ -83,7 +84,8 @@
             "additionalProperties": false,
             "properties": {
                 "$schema": {
-                    "const": "https://github.com/BSData/schemas/blob/master/repo.schema.json"
+                    "type": "string",
+                    "default": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json"
                 },
                 "name": {
                     "type": "string",
