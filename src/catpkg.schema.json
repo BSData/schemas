@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json",
-    "title": "BSData Gallery API schema.",
+    "$id": "https://raw.githubusercontent.com/BSData/schemas/master/src/catpkg.schema.json",
+    "title": "CatPkg Gallery API schema.",
     "description": "Schema for an index of either repository source (aka gallery) or repository itself.",
     "oneOf": [
         {
@@ -12,6 +12,10 @@
         }
     ],
     "definitions": {
+        "$schema": {
+            "type": "string",
+            "default": "https://raw.githubusercontent.com/BSData/schemas/master/src/catpkg.schema.json"
+        },
         "repositorySource": {
             "type": "object",
             "title": "BSData repository metadata and index schema",
@@ -22,8 +26,7 @@
             "additionalProperties": false,
             "properties": {
                 "$schema": {
-                    "type": "string",
-                    "default": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json"
+                    "$ref": "#/definitions/$schema"
                 },
                 "name": {
                     "type": "string",
@@ -84,8 +87,7 @@
             "additionalProperties": false,
             "properties": {
                 "$schema": {
-                    "type": "string",
-                    "default": "https://raw.githubusercontent.com/BSData/schemas/master/src/bsdata-gallery.schema.json"
+                    "$ref": "#/definitions/$schema"
                 },
                 "name": {
                     "type": "string",
