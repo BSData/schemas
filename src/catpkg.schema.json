@@ -50,6 +50,9 @@
                 "repositorySourceUrl": {
                     "$ref": "#/definitions/repositorySourceUrl"
                 },
+                "repositorySourceGzipUrl": {
+                    "$ref": "#/definitions/repositorySourceGzipUrl"
+                },
                 "websiteUrl": {
                     "$ref": "#/definitions/websiteUrl"
                 },
@@ -125,6 +128,12 @@
                 "repositoryUrl": {
                     "$ref": "#/definitions/repositoryUrl"
                 },
+                "repositoryGzipUrl": {
+                    "$ref": "#/definitions/repositoryGzipUrl"
+                },
+                "repositoryBsrUrl": {
+                    "$ref": "#/definitions/repositoryBsrUrl"
+                },
                 "githubUrl": {
                     "$ref": "#/definitions/githubUrl"
                 },
@@ -193,18 +202,42 @@
         },
         "repositoryUrl": {
             "type": "string",
-            "description": "URL of repository's 'bsdata.json'.",
+            "description": "URL of repository's 'catpkg.json'.",
             "format": "uri",
             "examples": [
                 "http://battlescribedata.appspot.com/repos/test-data"
             ]
         },
+        "repositoryGzipUrl": {
+            "type": "string",
+            "description": "URL of repository's 'catpkg.json.gz' which is just a compressed 'catpkg.json'",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos/test-data.gz"
+            ]
+        },
+        "repositoryBsrUrl": {
+            "type": "string",
+            "description": "URL of repository's '.bsr' file which is a ZIP archive of datafiles.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos/test-data.bsr"
+            ]
+        },
         "repositorySourceUrl": {
             "type": "string",
-            "description": "URL of repository source's 'bsdata.json'.",
+            "description": "URL of repository source's 'gallery-catpkg.json'.",
             "format": "uri",
             "examples": [
                 "http://battlescribedata.appspot.com/repos"
+            ]
+        },
+        "repositorySourceGzipUrl": {
+            "type": "string",
+            "description": "URL of repository source's 'gallery-catpkg.json.gz' which is just a compressed 'gallery-catpkg.json'.",
+            "format": "uri",
+            "examples": [
+                "http://battlescribedata.appspot.com/repos.gz"
             ]
         },
         "websiteUrl": {
