@@ -137,6 +137,9 @@
                 "reportBugUrl": {
                     "$ref": "#/definitions/reportBugUrl"
                 },
+                "archived": {
+                    "$ref": "#/definitions/archived"
+                },
                 "repositoryFiles": {
                     "type": "array",
                     "description": "List of datafiles.",
@@ -271,6 +274,10 @@
             "examples": [
                 "http://battlescribedata.appspot.com/#/repo/test-data"
             ]
+        },
+        "archived": {
+            "type": "boolean",
+            "description": "Whether the repository on GitHub was archived and is no longer maintained."
         },
         "file": {
             "type": "object",
