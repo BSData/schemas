@@ -312,6 +312,14 @@
             "type": "boolean",
             "description": "Whether the repository on GitHub was archived and is no longer maintained."
         },
+        "sha256": {
+            "type": "string",
+            "description": "SHA256 hash string.",
+            "pattern": "^[A-F0-9]{64}$",
+            "examples": [
+                "9AB6D2AD3EDD8C7315D567E69F2750356C825447274C245782EF44E6C10AA324"
+            ]
+        },
         "file": {
             "type": "object",
             "description": "Repository file description",
@@ -400,6 +408,11 @@
                     "examples": [
                         "https://github.com/BSData"
                     ]
+                },
+                "sourceSha256": {
+                    "$ref": "#/definitions/sha256",
+                    "title": "File contents hash.",
+                    "description": "SHA256 hash of the uncompressed file content."
                 }
             },
             "additionalProperties": false
