@@ -371,21 +371,30 @@
                     "$ref": "#/definitions/reportBugUrl"
                 },
                 "authorName": {
-                    "type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Display name of the datafile author",
                     "examples": [
                         "BSData developers"
                     ]
                 },
                 "authorContact": {
-                    "type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Some kind of contact detail, e.g. Twitter handle, chatroom username, email",
                     "examples": [
                         "@bsdata"
                     ]
                 },
                 "authorUrl": {
-                    "type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "URL of datafile author's website.",
                     "format": "uri",
                     "examples": [
