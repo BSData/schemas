@@ -312,6 +312,13 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="SelectionFromKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="group"/>
+      <xs:enumeration value="entry"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <!--selection entry group-->
   <xs:complexType name="SelectionEntryGroup">
     <xs:complexContent>
@@ -669,6 +676,7 @@
         </xs:sequence>
         <xs:attribute name="number" type="xs:nonNegativeInteger" use="required" />
         <xs:attribute name="type" type="tns:SelectionEntryKind" use="required" />
+        <xs:attribute name="from" type="tns:SelectionFromKind" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
